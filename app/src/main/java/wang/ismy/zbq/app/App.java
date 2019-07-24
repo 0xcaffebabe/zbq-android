@@ -20,39 +20,39 @@ import wang.ismy.zbq.http.ZbqCookieJar;
 public abstract class App {
 
     protected static final OkHttpClient httpClient = new OkHttpClient().newBuilder()
-                                                .cookieJar(new ZbqCookieJar())
-                                                .build();
+            .cookieJar(new ZbqCookieJar())
+            .build();
 
     protected Gson JSON = new Gson();
 
 
     protected Response get(String url) throws IOException {
         Request request = new Request.Builder()
-                .url(URL.BASE_URL+url)
+                .url(URL.BASE_URL + url)
                 .get()
                 .build();
         return httpClient.newCall(request).execute();
     }
 
-    protected Response post(String url,RequestBody body) throws IOException {
+    protected Response post(String url, RequestBody body) throws IOException {
         Request request = new Request.Builder()
-                .url(URL.BASE_URL+url)
+                .url(URL.BASE_URL + url)
                 .post(body)
                 .build();
         return httpClient.newCall(request).execute();
     }
 
-    protected Response put(String url,RequestBody body) throws IOException {
+    protected Response put(String url, RequestBody body) throws IOException {
         Request request = new Request.Builder()
-                .url(URL.BASE_URL+url)
+                .url(URL.BASE_URL + url)
                 .put(body)
                 .build();
         return httpClient.newCall(request).execute();
     }
 
-    protected Response delete(String url,RequestBody body) throws IOException {
+    protected Response delete(String url, RequestBody body) throws IOException {
         Request request = new Request.Builder()
-                .url(URL.BASE_URL+url)
+                .url(URL.BASE_URL + url)
                 .delete(body)
                 .build();
         return httpClient.newCall(request).execute();
@@ -60,7 +60,7 @@ public abstract class App {
 
     protected Response delete(String url) throws IOException {
         Request request = new Request.Builder()
-                .url(URL.BASE_URL+url)
+                .url(URL.BASE_URL + url)
                 .delete()
                 .build();
         return httpClient.newCall(request).execute();

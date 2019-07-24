@@ -1,5 +1,7 @@
 package wang.ismy.zbq.login;
 
+import android.util.Log;
+
 import java.io.IOException;
 
 import okhttp3.MediaType;
@@ -8,6 +10,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import wang.ismy.zbq.app.App;
 import wang.ismy.zbq.constant.URL;
+import wang.ismy.zbq.model.Result;
 
 public class LoginApp extends App {
 
@@ -29,7 +32,10 @@ public class LoginApp extends App {
 
         try {
             Response response = post(URL.LOGIN_URL,body);
-            
+            Result result  =  JSON.fromJson(response.body().string(),Result.class);
+
+
+            Log.i("登录结果",result.getMsg());
         } catch (IOException e) {
             e.printStackTrace();
         }
