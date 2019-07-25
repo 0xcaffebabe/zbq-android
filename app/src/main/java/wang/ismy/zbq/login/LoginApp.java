@@ -1,16 +1,24 @@
 package wang.ismy.zbq.login;
 
+import android.renderscript.Script;
 import android.util.Log;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import wang.ismy.zbq.app.App;
+import wang.ismy.zbq.app.ZbqResponse;
 import wang.ismy.zbq.constant.URL;
+import wang.ismy.zbq.exception.AppException;
 import wang.ismy.zbq.model.Result;
+import wang.ismy.zbq.util.DigestUtil;
 
 public class LoginApp extends App {
 
@@ -18,26 +26,28 @@ public class LoginApp extends App {
 
     public UserModel userModel = new UserModel();
 
-    private LoginApp(){super();}
+    private LoginApp() {
+        super();
+    }
 
-    public static LoginApp newInstance(){
+    public static LoginApp newInstance() {
         return instance;
     }
 
-    public void login(){
+    public void login() throws Throwable {
 
-        String json = JSON.toJson(userModel);
+        UserModel tmpModel = new UserModel(userModel.getUsername(), DigestUtil.md5(userModel.getPassword()));
+
+        String json = JSON.toJson(tmpModel);
+
+        Log.i("登录",json);
 
         RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
 
-        try {
-            Response response = post(URL.LOGIN_URL,body);
-            Result result  =  JSON.fromJson(response.body().string(),Result.class);
+        ZbqResponse response = post(URL.LOGIN_URL, body);
 
-
-            Log.i("登录结果",result.getMsg());
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!response.getResult().isSuccess()){
+            throw new AppException(response.getResult().getMsg());
         }
     }
 }
