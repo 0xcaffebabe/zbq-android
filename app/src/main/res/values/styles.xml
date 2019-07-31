@@ -11,4 +11,15 @@
     <style name="AlterDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:background">#FFFFFF</item>
     </style>
+
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+
+    <declare-styleable name="MenuItemView">
+        <attr name="leftIcon" format="reference"/>
+        <attr name="title" format="string"/>
+    </declare-styleable>
+
 </resources>

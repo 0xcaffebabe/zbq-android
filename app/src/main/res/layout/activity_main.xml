@@ -66,6 +66,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:text="@={user.username}"
                 />
 
@@ -91,6 +93,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:textSize="22sp"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:text="@={user.password}"
                 />
 

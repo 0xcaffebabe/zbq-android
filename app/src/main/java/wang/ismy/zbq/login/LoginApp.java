@@ -1,24 +1,17 @@
 package wang.ismy.zbq.login;
 
-import android.renderscript.Script;
 import android.util.Log;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import okhttp3.MediaType;
-import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
+import wang.ismy.zbq.R;
 import wang.ismy.zbq.app.App;
 import wang.ismy.zbq.app.ZbqResponse;
 import wang.ismy.zbq.constant.URL;
 import wang.ismy.zbq.exception.AppException;
-import wang.ismy.zbq.model.Result;
 import wang.ismy.zbq.util.DigestUtil;
+import wang.ismy.zbq.util.StringUtil;
+import wang.ismy.zbq.util.SystemUtil;
 
 public class LoginApp extends App {
 
@@ -35,6 +28,15 @@ public class LoginApp extends App {
     }
 
     public void login() throws Throwable {
+
+
+        if (StringUtil.isEmpty(userModel.getUsername())){
+            SystemUtil.error(R.string.username_not_null);
+        }
+
+        if (StringUtil.isEmpty(userModel.getPassword())){
+            SystemUtil.error(R.string.password_not_null);
+        }
 
         UserModel tmpModel = new UserModel(userModel.getUsername(), DigestUtil.md5(userModel.getPassword()));
 

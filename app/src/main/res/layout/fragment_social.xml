@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
+
+
+    <wang.ismy.zbq.view.MenuItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftIcon="@drawable/user_group"
+        app:title="我的笔友"
+        />
+
+    <wang.ismy.zbq.view.MenuItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftIcon="@drawable/star"
+        app:title="笔圈动态"
+        />
+
+
+    <wang.ismy.zbq.view.MenuItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftIcon="@drawable/at"
+        app:title="与我相关"
+        />
+
+    <wang.ismy.zbq.view.MenuItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftIcon="@drawable/location"
+        app:title="转笔地图"
+        />
+
+    <wang.ismy.zbq.view.MenuItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftIcon="@drawable/microphone"
+        app:title="转笔广场"
+        />
+
+
+
+</LinearLayout>

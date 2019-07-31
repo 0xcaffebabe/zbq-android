@@ -15,6 +15,7 @@ import wang.ismy.zbq.R;
 import wang.ismy.zbq.databinding.ActivityMainBinding;
 import wang.ismy.zbq.login.LoginApp;
 import wang.ismy.zbq.login.UserModel;
+import wang.ismy.zbq.system.ZbqApplication;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,12 +24,13 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     private Presenter presenter = new Presenter();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         binding.setUser(loginApp.userModel);
         binding.setPresenter(presenter);
@@ -36,19 +38,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public class Presenter{
+    public class Presenter {
 
-        public void loginClick(){
+        public void loginClick() {
 
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
                         loginApp.login();
+                        // 登录成功
+
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                presenter.showTip("登录成功");
+                                presenter.showTip(ZbqApplication.getStr(R.string.login_success));
                             }
                         });
                     } catch (final Throwable throwable) {
@@ -65,19 +70,15 @@ public class MainActivity extends AppCompatActivity {
             }).start();
         }
 
-        public void registerClick(){
+        public void registerClick() {
 
-                new AlertDialog.Builder(MainActivity.this,R.style.AlterDialogCustom)
-                        .setTitle("提示")
-                        .setMessage("功能暂未实现")
-                        .create().show();
-
+            showTip(ZbqApplication.getStr(R.string.unrealized));
 
         }
 
-        public void showTip(String str){
-            new AlertDialog.Builder(MainActivity.this,R.style.AlterDialogCustom)
-                    .setTitle("提示")
+        public void showTip(String str) {
+            new AlertDialog.Builder(MainActivity.this, R.style.AlterDialogCustom)
+                    .setTitle(ZbqApplication.getStr(R.string.tip))
                     .setMessage(str)
                     .create().show();
         }
