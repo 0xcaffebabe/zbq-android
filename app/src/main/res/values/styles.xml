@@ -20,6 +20,7 @@
     <declare-styleable name="MenuItemView">
         <attr name="leftIcon" format="reference"/>
         <attr name="title" format="string"/>
+        <attr name="target" format="string"/>
     </declare-styleable>
 
 </resources>

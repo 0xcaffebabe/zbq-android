@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/menu_item_container"
     android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@color/white"
+    android:background="@drawable/menu_item_bg"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_marginBottom="10dp"
-    >
+    android:clickable="true"
+
+    android:focusable="true">
 
     <ImageView
         android:id="@+id/menu_item_left_icon"
@@ -16,6 +19,7 @@
         android:src="@drawable/microphone"
         android:scaleY="0.5"
         android:scaleX="0.5"
+
         />
 
     <TextView
@@ -27,6 +31,7 @@
         android:layout_weight="1"
         android:textSize="@dimen/menu_text_size"
         android:paddingLeft="10dp"
+
         />
 
     <ImageView
@@ -35,6 +40,7 @@
         android:src="@drawable/left_arrow"
         android:scaleY="0.75"
         android:scaleX="0.75"
+
         />
 
 </LinearLayout>

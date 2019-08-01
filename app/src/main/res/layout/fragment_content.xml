@@ -12,35 +12,22 @@
     <wang.ismy.zbq.view.MenuItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:leftIcon="@drawable/user_group"
-        app:title="我的笔友"
-        app:target="xxxx"
+        app:leftIcon="@drawable/ie"
+        app:title="全网转笔"
         />
 
     <wang.ismy.zbq.view.MenuItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:leftIcon="@drawable/star"
-        app:title="笔圈动态" />
+        app:leftIcon="@drawable/search"
+        app:title="发现内容" />
 
 
     <wang.ismy.zbq.view.MenuItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:leftIcon="@drawable/at"
-        app:title="与我相关" />
+        app:leftIcon="@drawable/heart"
+        app:title="我的收藏" />
 
-    <wang.ismy.zbq.view.MenuItemView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:leftIcon="@drawable/location"
-        app:title="转笔地图" />
-
-    <wang.ismy.zbq.view.MenuItemView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:leftIcon="@drawable/microphone"
-        app:title="转笔广场" />
-
-
+    
 </LinearLayout>
