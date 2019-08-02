@@ -28,6 +28,8 @@ import wang.ismy.zbq.fragment.ContentFragment;
 import wang.ismy.zbq.fragment.PersonFragment;
 import wang.ismy.zbq.fragment.SocialFragment;
 import wang.ismy.zbq.fragment.StudyFragment;
+import wang.ismy.zbq.model.HomeModel;
+import wang.ismy.zbq.model.TabItemModel;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -37,7 +39,11 @@ public class HomeActivity extends AppCompatActivity {
     private List<Fragment> fragmentList =
             Arrays.asList(new SocialFragment(),new ContentFragment(),new StudyFragment(),new PersonFragment());
 
-    private List<String> tabList = Arrays.asList("社交","内容","学习","我的");
+    private List<TabItemModel> tabList = Arrays.asList(new TabItemModel("社交",R.drawable.social),new TabItemModel("内容",R.drawable.content),
+            new TabItemModel("学习",R.drawable.study),new TabItemModel("我的",R.drawable.my));
+
+    private HomeModel homeModel = new HomeModel();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +51,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_home);
-
+        homeModel.setTitle("社交");
+        binding.setHome(homeModel);
         binding.homeContainer.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -57,17 +64,18 @@ public class HomeActivity extends AppCompatActivity {
                 return fragmentList.size();
             }
         });
-        for (String s: tabList){
+        for (TabItemModel t: tabList){
             TabLayout.Tab tab = binding.homeTabLayout.newTab();
-            tab.setText(s);
-            tab.setIcon(R.drawable.compass);
+            tab.setText(t.getText());
+            tab.setIcon(t.getIcon());
+
             binding.homeTabLayout.addTab(tab);
         }
         binding.homeTabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                binding.homeContainer.setCurrentItem(tabList.indexOf(Objects.requireNonNull(tab.getText()).toString()));
 
+                binding.homeContainer.setCurrentItem(getTabItem(tab.getText().toString()));
 
             }
 
@@ -93,7 +101,9 @@ public class HomeActivity extends AppCompatActivity {
                 TabLayout.Tab tab = binding.homeTabLayout.getTabAt(position);
                 if (tab != null){
                     tab.select();
+                    homeModel.setTitle(tabList.get(position).getText());
                 }
+
 
             }
 
@@ -105,9 +115,12 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public class Presenter{
-        public void menuItemClick(){
-            Toast.makeText(getApplicationContext(),"click",Toast.LENGTH_SHORT).show();
+    private int getTabItem(String tabText){
+        for(int i=0;i<tabList.size();i++){
+            if (tabList.get(i).equals(tabText)){
+                return i;
+            }
         }
+        return -1;
     }
 }

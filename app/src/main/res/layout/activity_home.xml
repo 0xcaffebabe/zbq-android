@@ -3,8 +3,8 @@
 
     <data>
         <variable
-            name="presenter"
-            type="wang.ismy.zbq.activity.HomeActivity.Presenter" />
+            name="home"
+            type="wang.ismy.zbq.model.HomeModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="社交"
+                android:text="@{home.title}"
                 android:textColor="#fff"
                 android:textSize="22sp" />
 

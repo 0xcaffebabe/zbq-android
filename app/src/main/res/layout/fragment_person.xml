@@ -1,71 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
-    android:orientation="vertical">
-
-    <LinearLayout
+    <data>
+        <variable
+            name="userInfo"
+            type="wang.ismy.zbq.person.UserInfo" />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="20dp"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor"
+        android:orientation="vertical">
 
-        >
-
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ava"
+            android:background="@color/white"
+            android:padding="20dp"
 
-            />
-        <TextView
+            >
 
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="My、"
-            android:gravity="center|left"
-            android:paddingLeft="20dp"
-            android:textSize="22sp"
-            />
+            <ImageView
+                android:id="@+id/fragment_person_profile"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ava"
+                />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/left_arrow"
-            android:scaleY="0.75"
-            android:scaleX="0.75"
-            />
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:paddingLeft="20dp"
+                android:text="@{userInfo.nickName}"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleX="0.75"
+                android:scaleY="0.75"
+                android:src="@drawable/left_arrow" />
+        </LinearLayout>
+
+
+        <wang.ismy.zbq.view.MenuItemView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:leftIcon="@drawable/home"
+            app:title="我的主页" />
+
+        <wang.ismy.zbq.view.MenuItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:leftIcon="@drawable/user"
+            app:title="用户中心" />
+
+
+        <wang.ismy.zbq.view.MenuItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:leftIcon="@drawable/setting"
+            app:title="设置中心" />
+
+
     </LinearLayout>
-    
-
-    <wang.ismy.zbq.view.MenuItemView
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:leftIcon="@drawable/home"
-        app:title="我的主页"
-        android:layout_marginTop="10dp"
-        />
-
-    <wang.ismy.zbq.view.MenuItemView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:leftIcon="@drawable/user"
-        app:title="用户中心" />
-
-
-    <wang.ismy.zbq.view.MenuItemView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:leftIcon="@drawable/setting"
-        app:title="设置中心" />
-
-    
-
-
-</LinearLayout>
+</layout>

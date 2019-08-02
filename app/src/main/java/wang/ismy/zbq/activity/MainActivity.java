@@ -1,5 +1,6 @@
 package wang.ismy.zbq.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -16,6 +17,7 @@ import wang.ismy.zbq.databinding.ActivityMainBinding;
 import wang.ismy.zbq.login.LoginApp;
 import wang.ismy.zbq.login.UserModel;
 import wang.ismy.zbq.system.ZbqApplication;
+import wang.ismy.zbq.util.UIUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,11 +51,12 @@ public class MainActivity extends AppCompatActivity {
                         loginApp.login();
                         // 登录成功
 
-
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                presenter.showTip(ZbqApplication.getStr(R.string.login_success));
+
+                                UIUtil.openActivity(getApplicationContext(),HomeActivity.class);
+                                //presenter.showTip(ZbqApplication.getStr(R.string.login_success));
                             }
                         });
                     } catch (final Throwable throwable) {
