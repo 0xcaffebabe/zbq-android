@@ -1,7 +1,12 @@
 package wang.ismy.zbq.login;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
+import androidx.databinding.ObservableBoolean;
+
+import lombok.var;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import wang.ismy.zbq.R;
@@ -17,18 +22,33 @@ public class LoginApp extends App {
 
     private static LoginApp instance = new LoginApp();
 
+    private Context context;
+
     public UserModel userModel = new UserModel();
+
+    public ObservableBoolean remeberPassword = new ObservableBoolean();
 
     private LoginApp() {
         super();
     }
 
-    public static LoginApp newInstance() {
+    public static LoginApp newInstance(Context context) {
+        instance.context = context;
+        SharedPreferences sharedPreferences = context.getSharedPreferences("zbq",Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username","");
+        String password = sharedPreferences.getString("password","");
+        if (!StringUtil.isEmpty(username)){
+            instance.userModel.setUsername(username);
+            instance.userModel.setPassword(password);
+            instance.remeberPassword.set(true);
+        }
         return instance;
     }
 
     public void login() throws Throwable {
 
+
+        Log.e("iii", String.valueOf(remeberPassword.get()));
 
         if (StringUtil.isEmpty(userModel.getUsername())){
             SystemUtil.error(R.string.username_not_null);
@@ -50,6 +70,15 @@ public class LoginApp extends App {
 
         if (!response.getResult().isSuccess()){
             throw new AppException(response.getResult().getMsg());
+        }
+
+        if (remeberPassword.get()){
+            SharedPreferences sharedPreferences = context.getSharedPreferences("zbq",Context.MODE_PRIVATE);
+            sharedPreferences.edit()
+                    .putString("username",userModel.getUsername())
+                    .putString("password",userModel.getPassword())
+                    .apply();
+
         }
     }
 }

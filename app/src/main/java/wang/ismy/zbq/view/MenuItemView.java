@@ -53,6 +53,7 @@ public class MenuItemView extends LinearLayout {
                 Toast.makeText(getContext(),"点击事件",Toast.LENGTH_SHORT).show();
             }
         });
+        ta.recycle();
 
 
     }
