@@ -117,5 +117,12 @@ public class MainActivity extends AppCompatActivity {
             binding.mainActivityPasswordTextBox.setSelection(binding.mainActivityPasswordTextBox.getText().length());
 
         }
+
+        public void register(){
+            Intent intent = new Intent();
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setClass(getApplicationContext(),RegisterActivity.class);
+            startActivity(intent);
+        }
     }
 }

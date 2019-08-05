@@ -17,11 +17,18 @@
     </style>
 
 
+
     <declare-styleable name="MenuItemView">
         <attr name="leftIcon" format="reference"/>
         <attr name="title" format="string"/>
         <attr name="target" format="string"/>
     </declare-styleable>
 
+    <declare-styleable name="TextBoxView">
+        <attr name="leftText" format="string"/>
+        <attr name="hint" format="string"/>
+        <attr name="rightIcon" format="reference"/>
+        <attr name="inputMode" format="string"/>
+    </declare-styleable>
 
 </resources>

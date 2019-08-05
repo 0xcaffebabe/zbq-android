@@ -11,12 +11,14 @@
         android:paddingRight="10dp">
 
         <TextView
+            android:id="@+id/text_box_left_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="账号"
             android:textSize="22sp" />
 
         <EditText
+            android:id="@+id/text_box_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -25,9 +27,9 @@
             android:singleLine="true"
             android:layout_weight="1"
             android:hint="情输入账号"
-            android:text="@={user.username}"
             android:textSize="22sp" />
         <ImageView
+            android:id="@+id/text_box_right_icon"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:src="@drawable/clear"
@@ -46,7 +48,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-
             android:background="@android:color/darker_gray"
             />
     </LinearLayout>
