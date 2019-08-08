@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+        <variable
+            name="model"
+            type="wang.ismy.zbq.video.VideoSearchModel" />
+    </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -54,8 +60,10 @@
                 android:textSize="18sp"
                 />
             <SearchView
+                android:id="@+id/video_search_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:queryHint="情输入欲搜索的转笔关键词"
 
                 />
         </LinearLayout>
@@ -103,22 +111,13 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/activity_video_search_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
 
-                <wang.ismy.zbq.view.VideoItemView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <wang.ismy.zbq.view.VideoItemView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <wang.ismy.zbq.view.VideoItemView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
             </LinearLayout>
         </ScrollView>
 

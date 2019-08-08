@@ -1,6 +1,7 @@
 package wang.ismy.zbq.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import wang.ismy.zbq.R;
+import wang.ismy.zbq.activity.VideoSearchActivity;
 
 public class MenuItemView extends LinearLayout {
 
@@ -51,6 +53,10 @@ public class MenuItemView extends LinearLayout {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(),"点击事件",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setClass(getContext(), VideoSearchActivity.class);
+                getContext().startActivity(intent);
             }
         });
         ta.recycle();

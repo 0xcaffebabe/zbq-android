@@ -10,7 +10,7 @@ import wang.ismy.zbq.http.ZbqCookieJar;
 
 public abstract class App {
 
-    protected static final OkHttpClient httpClient = new OkHttpClient().newBuilder()
+    private static final OkHttpClient httpClient = new OkHttpClient().newBuilder()
             .cookieJar(new ZbqCookieJar())
             .build();
 
@@ -22,8 +22,11 @@ public abstract class App {
                 .url(URL.BASE_URL + url)
                 .get()
                 .build();
+
         return new ZbqResponse(httpClient.newCall(request).execute());
     }
+
+
 
     protected ZbqResponse post(String url, RequestBody body) throws Throwable {
         Request request = new Request.Builder()
@@ -56,6 +59,8 @@ public abstract class App {
                 .build();
         return new ZbqResponse(httpClient.newCall(request).execute());
     }
+
+
 
 
 }

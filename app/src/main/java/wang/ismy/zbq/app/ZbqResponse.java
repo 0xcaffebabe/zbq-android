@@ -24,7 +24,6 @@ public class ZbqResponse {
     public ZbqResponse(Response response) throws Throwable {
         this.response = response;
         String s = response.body().string();
-        Log.e("eee",s);
 
         JsonElement jsonElement = new JsonParser().parse(s);
         result = new Result();
