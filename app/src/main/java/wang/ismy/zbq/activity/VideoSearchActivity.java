@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import wang.ismy.zbq.R;
 import wang.ismy.zbq.databinding.ActivityVideoSearchBinding;
 import wang.ismy.zbq.system.ZbqApplication;
+import wang.ismy.zbq.video.HotKeyword;
 import wang.ismy.zbq.video.Video;
 import wang.ismy.zbq.video.VideoSearchApp;
 import wang.ismy.zbq.view.VideoItemView;
@@ -91,6 +93,25 @@ public class VideoSearchActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        // 获取热词
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    app.getHotKw();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            initHotKw();
+                        }
+                    });
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                    new Presenter().showTip(throwable.getMessage());
+                }
+            }
+        }).start();
     }
 
     public class Presenter{
@@ -104,6 +125,7 @@ public class VideoSearchActivity extends AppCompatActivity {
 
     public void initList(){
         LinearLayout linearLayout = findViewById(R.id.activity_video_search_list);
+        linearLayout.removeAllViews();
         for (Video i:app.videoList){
             VideoItemView videoItemView = new VideoItemView(getApplicationContext());
             videoItemView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -111,7 +133,22 @@ public class VideoSearchActivity extends AppCompatActivity {
             linearLayout.addView(videoItemView);
         }
 
+    }
 
+    public void initHotKw(){
+        LinearLayout linearLayout = findViewById(R.id.activity_video_search_hot_kw);
 
+        for (HotKeyword kw:app.hotKw){
+            final Button button = new Button(getApplicationContext());
+            button.setText(kw.getKw());
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    binding.videoSearchInput.setQuery(button.getText(),true);
+                    binding.videoSearchInput.requestFocus();
+                }
+            });
+            linearLayout.addView(button);
+        }
     }
 }

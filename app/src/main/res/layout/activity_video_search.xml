@@ -75,33 +75,11 @@
             >
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/activity_video_search_hot_kw"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="转笔探讨" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="转笔探讨2017" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="转笔探讨19" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nope" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="peem" />
             </LinearLayout>
 
         </HorizontalScrollView>

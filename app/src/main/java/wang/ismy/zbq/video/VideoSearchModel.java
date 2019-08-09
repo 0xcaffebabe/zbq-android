@@ -3,11 +3,15 @@ package wang.ismy.zbq.video;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class VideoSearchModel extends BaseObservable {
 
     private Integer engine;
 
     private String kw;
+
 
     @Bindable
     public Integer getEngine() {
@@ -28,4 +32,6 @@ public class VideoSearchModel extends BaseObservable {
         this.kw = kw;
         notifyChange();
     }
+
+
 }

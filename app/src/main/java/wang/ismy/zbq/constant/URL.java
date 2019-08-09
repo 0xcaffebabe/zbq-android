@@ -11,4 +11,6 @@ public class URL {
     public static final String REGISTER_URL = "user/register";
 
     public static final String VIDEO_SEARCH="video/search";
+
+    public static final String VIDEO_SEARCH_HOT_KW = "video/hotKw";
 }

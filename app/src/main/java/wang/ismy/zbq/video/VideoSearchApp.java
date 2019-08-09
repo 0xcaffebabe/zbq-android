@@ -5,7 +5,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import wang.ismy.zbq.app.App;
 import wang.ismy.zbq.app.ZbqResponse;
@@ -19,6 +21,8 @@ public class VideoSearchApp extends App {
 
     public List<Video> videoList = new ArrayList<>();
 
+    public List<HotKeyword> hotKw = new ArrayList<>();
+
     private static final VideoSearchApp instance = new VideoSearchApp();
 
     private VideoSearchApp() { }
@@ -27,11 +31,10 @@ public class VideoSearchApp extends App {
 
         String kw = videoSearchModel.getKw();
         Integer engine = videoSearchModel.getEngine();
-
+        videoList = new ArrayList<>();
         if (StringUtil.isEmpty(kw)){
             throw new AppException("搜索关键词不得为空");
         }
-
 
         ZbqResponse zbqResponse = get(URL.VIDEO_SEARCH+"?kw="+
                 URLEncoder.encode(kw,"utf8")+"&engine="+engine+"&page=1&length=20");
@@ -46,6 +49,19 @@ public class VideoSearchApp extends App {
 
     }
 
+    public void getHotKw() throws Throwable {
+
+        ZbqResponse response = get(URL.VIDEO_SEARCH_HOT_KW);
+
+        if (!response.getResult().isSuccess()){
+            throw new AppException(response.getResult().getMsg());
+        }
+
+        hotKw = new Gson().fromJson(response.getResult().getData(),new TypeToken<List<HotKeyword>>(){}.getType());
+
+
+
+    }
 
     public static VideoSearchApp newInstance(){
         return instance;
