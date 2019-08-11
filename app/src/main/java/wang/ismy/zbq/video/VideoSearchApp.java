@@ -25,19 +25,22 @@ public class VideoSearchApp extends App {
 
     private static final VideoSearchApp instance = new VideoSearchApp();
 
+    private int pageNumber = 0;
+
     private VideoSearchApp() { }
 
     public void search() throws Throwable {
+        pageNumber++;
 
         String kw = videoSearchModel.getKw();
         Integer engine = videoSearchModel.getEngine();
-        videoList = new ArrayList<>();
+
         if (StringUtil.isEmpty(kw)){
             throw new AppException("搜索关键词不得为空");
         }
 
         ZbqResponse zbqResponse = get(URL.VIDEO_SEARCH+"?kw="+
-                URLEncoder.encode(kw,"utf8")+"&engine="+engine+"&page=1&length=20");
+                URLEncoder.encode(kw,"utf8")+"&engine="+engine+"&page="+pageNumber+"&length=20");
 
         if (!zbqResponse.getResult().isSuccess()){
             throw new AppException(zbqResponse.getResult().getMsg());
@@ -45,8 +48,17 @@ public class VideoSearchApp extends App {
 
         List<Video> list= new Gson().fromJson(zbqResponse.getResult().getData(),new TypeToken<List<Video>>(){}.getType());
 
+        if (list.size() == 0){
+            throw new AppException("没有更多数据");
+        }
+
         videoList.addAll(list);
 
+    }
+
+    public void resetPageNumber(){
+        pageNumber = 0;
+        videoList.clear();
     }
 
     public void getHotKw() throws Throwable {

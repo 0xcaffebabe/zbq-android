@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 
 import wang.ismy.zbq.R;
 import wang.ismy.zbq.activity.VideoPlayActivity;
+import wang.ismy.zbq.util.StringUtil;
 import wang.ismy.zbq.video.Video;
 
 public class VideoItemView extends LinearLayout {
@@ -45,7 +46,7 @@ public class VideoItemView extends LinearLayout {
     }
 
     public void setVideo(final Video video){
-
+        video.setTitle(StringUtil.delHtmlTags(video.getTitle()));
         ImageView img = view.findViewById(R.id.view_video_item_img);
         TextView title = view.findViewById(R.id.view_video_item_title);
         TextView subtitle = view.findViewById(R.id.view_video_item_subtitle);

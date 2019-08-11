@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         app:leftIcon="@drawable/user_group"
         app:title="我的笔友"
-        app:target="xxxx"
         />
 
     <wang.ismy.zbq.view.MenuItemView

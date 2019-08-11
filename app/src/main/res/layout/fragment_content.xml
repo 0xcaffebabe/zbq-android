@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         app:leftIcon="@drawable/ie"
         app:title="全网转笔"
+        app:target="wang.ismy.zbq.activity.VideoSearchActivity"
         />
 
     <wang.ismy.zbq.view.MenuItemView

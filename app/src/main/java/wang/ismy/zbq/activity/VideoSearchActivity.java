@@ -37,9 +37,11 @@ public class VideoSearchActivity extends AppCompatActivity {
         binding.videoSearchSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                // 切换引擎
                 String kw = getResources().getStringArray(R.array.video_engine)[i];
                 binding.videoSearchEngine.setText(kw);
                 app.videoSearchModel.setEngine(i);
+                app.resetPageNumber();
 
             }
 
@@ -133,6 +135,37 @@ public class VideoSearchActivity extends AppCompatActivity {
             linearLayout.addView(videoItemView);
         }
 
+        Button button = new Button(getApplicationContext());
+        button.setText("加载更多");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            app.search();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    initList();
+                                }
+                            });
+                        } catch (final Throwable throwable) {
+                            throwable.printStackTrace();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    new Presenter().showTip(throwable.getMessage());
+                                }
+                            });
+                        }
+                    }
+                }).start();
+            }
+        });
+        linearLayout.addView(button);
+
     }
 
     public void initHotKw(){
@@ -146,6 +179,7 @@ public class VideoSearchActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     binding.videoSearchInput.setQuery(button.getText(),true);
                     binding.videoSearchInput.requestFocus();
+                    app.videoList.clear();
                 }
             });
             linearLayout.addView(button);

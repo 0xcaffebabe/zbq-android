@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import wang.ismy.zbq.R;
 import wang.ismy.zbq.activity.VideoSearchActivity;
+import wang.ismy.zbq.util.StringUtil;
 
 public class MenuItemView extends LinearLayout {
 
@@ -52,11 +53,17 @@ public class MenuItemView extends LinearLayout {
         view.findViewById(R.id.menu_item_container).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(),"点击事件",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent();
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClass(getContext(), VideoSearchActivity.class);
-                getContext().startActivity(intent);
+                if (!StringUtil.isEmpty(target)){
+                    Intent intent = new Intent();
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    try {
+                        intent.setClass(getContext(), Class.forName(target));
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    getContext().startActivity(intent);
+                }
+
             }
         });
         ta.recycle();
