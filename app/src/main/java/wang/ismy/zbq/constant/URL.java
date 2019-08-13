@@ -13,4 +13,8 @@ public class URL {
     public static final String VIDEO_SEARCH="video/search";
 
     public static final String VIDEO_SEARCH_HOT_KW = "video/hotKw";
+
+    public static final String COUNT_USER_URL = "user/count";
+
+    public static final String COUNT_ONLINE_USER = "user/online/count";
 }

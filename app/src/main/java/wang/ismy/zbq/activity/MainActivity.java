@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.EditText;
@@ -47,9 +48,54 @@ public class MainActivity extends AppCompatActivity {
         binding.setUser(loginApp.userModel);
         binding.setPresenter(presenter);
         binding.setRememberPassword(loginApp.remeberPassword);
+        binding.setUserCount(loginApp.userCount);
+        binding.setOnlineUserCount(loginApp.onlineUserCount);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    loginApp.countUser();
+                    loginApp.countOnlineUser();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                    presenter.showTip(throwable.getMessage());
+                }
+            }
+        }).start();
+        autoLogin();
+
 
     }
 
+    private void autoLogin(){
+        SharedPreferences sharedPreferences = getSharedPreferences("zbq", Context.MODE_PRIVATE);
+
+        String username = sharedPreferences.getString("username",null);
+
+        if (username != null){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),"3秒后自动登录",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    try {
+                        Thread.sleep(3000);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    presenter.loginClick();
+
+                }
+            }).start();
+
+        }
+    }
     public class Presenter {
 
         public void loginClick() {

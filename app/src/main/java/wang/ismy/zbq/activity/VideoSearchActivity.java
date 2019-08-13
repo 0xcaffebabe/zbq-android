@@ -87,12 +87,22 @@ public class VideoSearchActivity extends AppCompatActivity {
                     }
                 }).start();
 
+                app.resetPageNumber();
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
                 return false;
+            }
+        });
+
+        binding.videoSearchInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.videoSearchInput.setFocusable(true);
+                binding.videoSearchInput.setIconified(false);
+                binding.videoSearchInput.requestFocusFromTouch();;
             }
         });
 

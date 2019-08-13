@@ -10,7 +10,7 @@ import wang.ismy.zbq.http.ZbqCookieJar;
 
 public abstract class App {
 
-    private static final OkHttpClient httpClient = new OkHttpClient().newBuilder()
+    protected static final OkHttpClient httpClient = new OkHttpClient().newBuilder()
             .cookieJar(new ZbqCookieJar())
             .build();
 
